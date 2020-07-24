@@ -15,8 +15,8 @@ public class BanderasViewHolder extends RecyclerView.ViewHolder {
 
     public BanderasViewHolder(@NonNull View itemView) {
         super(itemView);
-        nombre=itemView.findViewById(R.id.txt_Nombre);
-        imagen=itemView.findViewById(R.id.img_bandera);
+        nombre=itemView.findViewById(R.id.txt_nombre);
+        imagen=itemView.findViewById(R.id.imagen);
 
     }
 }
