@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.evaluacionparcial.R;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
@@ -38,10 +36,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
         Banderas bandera = lstBanderas.get(position);
 
-        holder.nombre.setText(bandera.getNombre());
+        holder.nombre.setText(bandera.getName());
 
         Glide.with(Ctx)
-                .load(bandera.getImagenurl())
+                .load(bandera.getFlag())
                 .into(holder.imagen);
 
     }
