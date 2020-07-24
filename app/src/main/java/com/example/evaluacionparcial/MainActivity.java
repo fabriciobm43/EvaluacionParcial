@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
 
 
         Map<String, String> datos = new HashMap<String, String>();
-        WebService ws= new WebService("https://reqres.in/api/users",
+        WebService ws= new WebService("https://restcountries.eu/rest/v2/all",
                 datos, MainActivity.this, MainActivity.this);
         ws.execute("GET");
 
@@ -69,16 +69,11 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
             JSONObject JSONlista =  new JSONObject(result);
             JSONArray JSONlistaBanderas=  JSONlista.getJSONArray("");
 
-            lstBanderas = Usuario.JsonObjectsBuild(JSONlistaUsuarios);
+            lstBanderas = Banderas.JsonObjectsBuild(JSONlistaBanderas);
 
-            Adapter adapatorUsuario = new Adapter(this, lstBanderas);
+            Adapter adapatorBanderas = new Adapter(this, lstBanderas);
 
-            int resId = R.anim.layout_animation_down_to_up;
-            LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getApplicationContext(),
-                    resId);
-            recyclerView.setLayoutAnimation(animation);
-
-            recyclerView.setAdapter(adapatorUsuario);
+            recyclerView.setAdapter(adapatorBanderas);
 
 
 

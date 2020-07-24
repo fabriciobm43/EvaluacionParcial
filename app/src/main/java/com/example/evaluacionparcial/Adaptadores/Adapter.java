@@ -10,55 +10,45 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.evaluacionparcial.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements View.OnClickListener{
+public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    private Context ct;
-    ArrayList<Banderas>  banderas;
+    private Context Ctx;
+    private List<Banderas> lstBanderas;
 
-    private  View.OnClickListener listener;
-
-    public Adapter(){
-        banderas=new ArrayList<>();
-    }
-
-    public void setData(ArrayList<Banderas> banderas){
-        this.banderas=banderas;
-    }
-    @Override
-    public void onClick(View v) {
-        if (listener!=null){
-            listener.onClick(v);
-        }
+    public Adapter(Context mCtx, List<Banderas> banderas) {
+        this.lstBanderas = banderas;
+        Ctx=mCtx;
     }
 
     @NonNull
     @Override
     public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context= parent.getContext();
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view= layoutInflater.inflate(R.layout.listabanderas,parent,false);
-
-        return new Adapter.ViewHolder(view);
-    }
-    public void setOnClickListener(View.OnClickListener listener){
-        this.listener=listener;
+        LayoutInflater inflater = LayoutInflater.from(Ctx);
+        View view = inflater.inflate(R.layout.listabanderas, null);
+        return new ViewHolder(view);
     }
     @Override
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
-        Banderas bandera= banderas.get(position);
-        Picasso.get().load(String.valueOf(bandera.imagenurl)).into(holder.imagen);
-        holder.nombre.setText(bandera.nombre);
+        Banderas bandera = lstBanderas.get(position);
+
+        holder.nombre.setText(bandera.getNombre());
+
+        Glide.with(Ctx)
+                .load(bandera.getImagenurl())
+                .into(holder.imagen);
 
     }
 
     @Override
     public int getItemCount() {
-        return banderas.size();
+        return lstBanderas.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
