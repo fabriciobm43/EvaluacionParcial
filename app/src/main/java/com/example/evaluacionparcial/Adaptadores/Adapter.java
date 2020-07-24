@@ -39,7 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.nombre.setText(bandera.getName());
 
         Glide.with(Ctx)
-                .load(bandera.getFlag())
+                .load(bandera.getAlpha2Code())
                 .into(holder.imagen);
 
     }

@@ -1,7 +1,7 @@
 package com.example.evaluacionparcial.Adaptadores;
 
 public class Banderas {
-     String name, flag;
+     String name, alpha2Code;
 
         public Banderas(){
 
@@ -15,11 +15,11 @@ public class Banderas {
         this.name = name;
     }
 
-    public String getFlag() {
-        return flag;
+    public String getAlpha2Code() {
+        return alpha2Code;
     }
 
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public void setAlpha2Code(String alpha2Code) {
+        this.alpha2Code = alpha2Code;
     }
 }

@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void getData() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Cargando accesorios...");
+        progressDialog.setMessage("Cargando banderas...");
         progressDialog.show();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Banderas bandera = new Banderas();
                         bandera.setName(jsonObject.getString("name"));
-                        bandera.setFlag(jsonObject.getString("flag"));
+                        bandera.setAlpha2Code(jsonObject.getString("alpha2Code"));
                         banderas.add(bandera);
 
                     } catch (JSONException e) {

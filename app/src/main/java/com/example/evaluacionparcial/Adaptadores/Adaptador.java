@@ -39,7 +39,7 @@ public class Adaptador extends RecyclerView.Adapter<BanderasViewHolder> {
     public void onBindViewHolder(@NonNull BanderasViewHolder holder, int position) {
 
         Banderas bandera= banderas.get(position);
-        Picasso.get().load(bandera.flag).into(holder.imagen);
+        Picasso.get().load("http://www.geognos.com/api/en/countries/flag/"+bandera.alpha2Code+".png").into(holder.imagen);
         holder.nombre.setText(bandera.name);
     }
 
