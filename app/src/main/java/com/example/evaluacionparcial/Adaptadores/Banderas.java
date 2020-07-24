@@ -3,7 +3,16 @@ package com.example.evaluacionparcial.Adaptadores;
 import android.widget.ImageView;
 
 public class Banderas {
-        String nombre, imagenurl;
+    private String nombre, imagenurl;
+    private String urlavatar;
+
+    public String getUrlavatar() {
+        return urlavatar;
+    }
+
+    public void setUrlavatar(String urlavatar) {
+        this.urlavatar = urlavatar;
+    }
 
     public Banderas() {
 
