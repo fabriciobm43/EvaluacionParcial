@@ -18,19 +18,16 @@ import java.util.ArrayList;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements View.OnClickListener{
 
     private Context ct;
-    LayoutInflater inflater;
-    ArrayList<Banderas> model;
+    ArrayList<Banderas>  banderas;
 
-    //Listener
     private  View.OnClickListener listener;
 
-    public Adapter(Context context, ArrayList<Banderas> model){
-        this.inflater= LayoutInflater.from(context);
-        this.model = model;
+    public Adapter(){
+        banderas=new ArrayList<>();
     }
 
     public void setData(ArrayList<Banderas> banderas){
-        this.model=banderas;
+        this.banderas=banderas;
     }
     @Override
     public void onClick(View v) {
@@ -42,25 +39,28 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     @NonNull
     @Override
     public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.listabanderas,parent,false);
-        view.setOnClickListener(this);
-        return new ViewHolder(view);
+        Context context= parent.getContext();
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View view= layoutInflater.inflate(R.layout.listabanderas,parent,false);
+
+        return new Adapter.ViewHolder(view);
     }
     public void setOnClickListener(View.OnClickListener listener){
         this.listener=listener;
     }
     @Override
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
-        String nombre=model.get(position).getName();
-        Picasso.get().load(model.).into(holder.imagen);
-        holder.nombre.setText(nombre);
-        holder.imagen.setImageResource(imagen);
+        Banderas bandera= banderas.get(position);
+        Picasso.get().load(String.valueOf(bandera.imagenurl)).into(holder.imagen);
+        holder.nombre.setText(bandera.nombre);
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return banderas.size();
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView nombre;

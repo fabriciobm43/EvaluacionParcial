@@ -3,30 +3,31 @@ package com.example.evaluacionparcial.Adaptadores;
 import android.widget.ImageView;
 
 public class Banderas {
-        String name;
-        ImageView imagen;
-        public void Banderas(){
+        String nombre, imagenurl;
 
+    public Banderas() {
+
+    }
+
+
+        public Banderas(String nombre, String imagenurl) {
+                this.nombre = nombre;
+                this.imagenurl = imagenurl;
         }
 
-        public Banderas(String name, ImageView imagen) {
-                this.name = name;
-                this.imagen = imagen;
+        public String getNombre() {
+                return nombre;
         }
 
-        public String getName() {
-                return name;
+        public void setNombre(String nombre) {
+                this.nombre = nombre;
         }
 
-        public void setName(String name) {
-                this.name = name;
+        public String getImagenurl() {
+                return imagenurl;
         }
 
-        public ImageView getImagen() {
-                return imagen;
-        }
-
-        public void setImagen(ImageView imagen) {
-                this.imagen = imagen;
+        public void setImagenurl(String imagenurl) {
+                this.imagenurl = imagenurl;
         }
 }
