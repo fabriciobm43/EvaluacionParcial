@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                 datos, MainActivity.this, MainActivity.this);
         ws.execute("GET");*/
 
-
     }
     private void getData() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
     }
+
 
     /*@Override
     public void processFinish(String result) throws JSONException {

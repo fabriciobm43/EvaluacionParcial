@@ -13,10 +13,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class Adaptador extends RecyclerView.Adapter<BanderasViewHolder> {
+public class Adaptador extends RecyclerView.Adapter<BanderasViewHolder> implements View.OnClickListener {
 
     private Context ct;
     ArrayList<Banderas> banderas;
+    private  View.OnClickListener listener;
 
     public Adaptador(){
         banderas=new ArrayList<>();
@@ -42,9 +43,19 @@ public class Adaptador extends RecyclerView.Adapter<BanderasViewHolder> {
         Picasso.get().load("http://www.geognos.com/api/en/countries/flag/"+bandera.alpha2Code+".png").into(holder.imagen);
         holder.nombre.setText(bandera.name);
     }
-
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener=listener;
+    }
     @Override
     public int getItemCount() {
         return banderas.size();
     }
+
+    @Override
+    public void onClick(View v) {
+        if (listener!=null){
+            listener.onClick(v);
+        }
+    }
+
 }
