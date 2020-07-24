@@ -23,7 +23,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.evaluacionparcial.Adaptadores.Adaptador;
+import com.example.evaluacionparcial.Adaptadores.Adapter;
 import com.example.evaluacionparcial.Adaptadores.Banderas;
+import com.example.evaluacionparcial.WebService.Asynchtask;
+import com.example.evaluacionparcial.WebService.WebService;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -31,13 +34,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Asynchtask {
 
     String url = "https://restcountries.eu/rest/v2/all";
     RecyclerView recyclerView;
     Adaptador adaptor;
-    ArrayList<Banderas> banderas;
+    List<Banderas> banderas;
     DrawerLayout drawerLayout;
     NavigationView navView;
 
@@ -47,27 +53,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
-        recyclerView = findViewById(R.id.recycler_banderas);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adaptor = new Adaptador();
-        recyclerView.setAdapter(adaptor);
+        //recyclerView = findViewById(R.id.recycler_banderas);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //adaptor = new Adaptador();
+        //recyclerView.setAdapter(adaptor);
         banderas = new ArrayList<>();
-        getData();
+        //getData();
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icono_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navView = (NavigationView)findViewById(R.id.nav_view);
         navView.setNavigationItemSelectedListener(this);
 
-        /*recyclerView = (RecyclerView) findViewById(R.id.recycler_banderas);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_banderas);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
 
 
         Map<String, String> datos = new HashMap<String, String>();
         WebService ws= new WebService("https://restcountries.eu/rest/v2/all",
                 datos, MainActivity.this, MainActivity.this);
-        ws.execute("GET");*/
+        ws.execute("GET");
 
     }
     @Override
@@ -75,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getMenuInflater().inflate(R.menu.toolbar , menu);
         return true;
     }
-    private void getData() {
+    /*private void getData() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Cargando banderas...");
         progressDialog.show();
@@ -151,31 +157,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         drawerLayout.closeDrawers();
         return true;
+    }*/
+
+
+
+
+    @Override
+    public void processFinish(String result) throws JSONException {
+        
+        JSONArray JSONlista=new JSONArray(result);
+        for (int i=0; i<JSONlista.length();i++){
+            JSONObject bandera=JSONlista.getJSONObject(i);
+            banderas.add(new Banderas(
+                    bandera.getString("name"),
+                    "http://www.geognos.com/api/en/countries/flag/"+bandera.getString("alpha2Code").toString()+".png"));
+        }
+    Adapter adapter=new Adapter(MainActivity.this,banderas);
+        recyclerView.setAdapter(adapter);
+
     }
 
-
-    /*@Override
-    public void processFinish(String result) throws JSONException {
-        ArrayList<Banderas> lstBanderas = new ArrayList<Banderas> ();
-
-        try {
-
-            JSONObject JSONlista =  new JSONObject(result);
-            JSONArray JSONlistaBanderas=  JSONlista.getJSONArray("");
-
-            lstBanderas = Banderas.JsonObjectsBuild(JSONlistaBanderas);
-
-            Adapter adapatorBanderas = new Adapter(this, lstBanderas);
-
-            recyclerView.setAdapter(adapatorBanderas);
-
-
-
-        }catch (JSONException e)
-        {
-            Toast.makeText(this.getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG);
-        }
-
-
-    }*/
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        return false;
+    }
 }

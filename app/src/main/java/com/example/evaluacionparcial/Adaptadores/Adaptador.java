@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.evaluacionparcial.R;
 import com.squareup.picasso.Picasso;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 
 public class Adaptador extends RecyclerView.Adapter<BanderasViewHolder> implements View.OnClickListener {
 
-    private Context ct;
+    private Context Ctx;
     ArrayList<Banderas> banderas;
     private  View.OnClickListener listener;
 
@@ -40,7 +41,8 @@ public class Adaptador extends RecyclerView.Adapter<BanderasViewHolder> implemen
     public void onBindViewHolder(@NonNull BanderasViewHolder holder, int position) {
 
         Banderas bandera= banderas.get(position);
-        Picasso.get().load("http://www.geognos.com/api/en/countries/flag/"+bandera.alpha2Code+".png").into(holder.imagen);
+        //Picasso.get().load("http://www.geognos.com/api/en/countries/flag/"+bandera.alpha2Code+".png").into(holder.imagen);
+        Glide.with(Ctx).load("http://www.geognos.com/api/en/countries/flag/"+bandera.alpha2Code+".png").into(holder.imagen);
         holder.nombre.setText(bandera.name);
     }
     public void setOnClickListener(View.OnClickListener listener){
